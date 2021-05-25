@@ -1,12 +1,15 @@
 from kivy.app import App
 from kivy.uix.button import Button
+from kivy.uix.floatlayout import FloatLayout
 
-class TutorialApp(App):
+class Keybored(App):
     def build(self):
-        return Button(text='Hello!',
-                      background_color=(0, 0, 1, 1),  # List of
-                                                      # rgba components
-                      font_size=150)
+        fl = FloatLayout()
+        for i in range(0,9):
+            fl.add_widget(Button(
+                background_color = (0,0,0,0)))
+
+        return fl
 
 if __name__ == "__main__":
-    TutorialApp().run()
+    Keybored().run()
