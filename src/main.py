@@ -1,12 +1,12 @@
 import kivy
-from kivy.app import App
-from kivy.uix.gridlayout import GridLayout
 kivy.require("2.0.0")
 
-class GameScreen(GridLayout):
-       pass
+from kivy.app import App
+from man import root_widget
+
 
 class Keybored(App):
     def build(self):
-        return GameScreen()
+        return root_widget
+
 Keybored().run()

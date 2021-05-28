@@ -1,0 +1,45 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+Man:
+    transition: FadeTransition()
+    MenuScreen:
+    GameScreen:
+
+<GameButton@Button>:
+    group: 'game'
+    on_press: self.background_color = (0,0,0,0)
+    on_release: self.background_color = (1,1,1,1)
+    background_color: (1,1,1,1)
+    background_normal: ''
+
+
+<MenuScreen>:
+    name: 'menuscreen'
+    BoxLayout:
+        Button:
+            text: 'Start!'
+            on_release: app.root.current = 'gamescreen'
+            background_color: (0,1,0,1)
+<GameScreen>:
+    name: 'gamescreen'
+    GridLayout:
+        cols: 3
+        padding: 5
+        spacing: 5
+        GameButton:
+            id: 0
+        GameButton:
+            id: 1
+        GameButton:
+            id: 2
+        GameButton:
+            id: 3
+        GameButton:
+            id: 4
+        GameButton:
+            id:5
+        GameButton:
+            id: 6
+        GameButton:
+            id: 7
+        GameButton:
+            id: 8
