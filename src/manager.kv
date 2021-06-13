@@ -1,18 +1,34 @@
 #:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import Factory kivy.factory.Factory
+
 Man:
     transition: FadeTransition()
     MenuScreen:
     GameScreen:
 
-<GameButton@Button>:
+<GameButton@ToggleButton>:
     group: 'game'
     on_press:
         self.background_color = (0,0,0,0)
     on_release:
         self.background_color = (1,1,1,1)
-    background_color: (0,0,0,0)
+    background_color: (1,1,1,1)
     background_normal: ''
 
+<Message>:
+    title: 'Loss!'
+    size_hint: .4,.5
+    auto_dismiss: False
+
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'You lost!'
+        Button:
+            size_hint: 1, .2
+            text: 'Restart'
+            on_press: app.root.get_screen('gamescreen').restart()
+            on_release: root.dismiss()
 
 <MenuScreen>:
     name: 'menuscreen'
@@ -54,6 +70,7 @@ Man:
         spacing: 5
         GameButton:
             id: 0
+            on_release: Factory.Message().open()
         GameButton:
             id: 1
         GameButton:
