@@ -8,9 +8,12 @@ class Man(ScreenManager):
 class MenuScreen(Screen):
     pass
 
-class Message(Popup):
+class Lost(Popup):
     def __init__(self, **kwargs):
-        super(Message, self).__init__(**kwargs)
+        super(Lost, self).__init__(**kwargs)
+
+class Won(Popup):
+    pass
 
 class GameScreen(Screen):
     def restart(self):

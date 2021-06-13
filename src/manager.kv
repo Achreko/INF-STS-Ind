@@ -15,7 +15,7 @@ Man:
     background_color: (1,1,1,1)
     background_normal: ''
 
-<Message>:
+<Lost>:
     title: 'Loss!'
     size_hint: .4,.5
     auto_dismiss: False
@@ -24,6 +24,21 @@ Man:
         orientation: 'vertical'
         Label:
             text: 'You lost!'
+        Button:
+            size_hint: 1, .2
+            text: 'Restart'
+            on_press: app.root.get_screen('gamescreen').restart()
+            on_release: root.dismiss()
+
+<Won>:
+    title: 'Win!'
+    size_hint: .4,.5
+    auto_dismiss: False
+
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'You won!'
         Button:
             size_hint: 1, .2
             text: 'Restart'
@@ -70,7 +85,7 @@ Man:
         spacing: 5
         GameButton:
             id: 0
-            on_release: Factory.Message().open()
+            on_release: Factory.Won().open()
         GameButton:
             id: 1
         GameButton:
