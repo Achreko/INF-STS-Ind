@@ -1,3 +1,4 @@
+#:kivy 2.0.0
 #:import FadeTransition kivy.uix.screenmanager.FadeTransition
 #:import Factory kivy.factory.Factory
 
@@ -9,11 +10,17 @@ Man:
 <GameButton@ToggleButton>:
     group: 'game'
     on_press:
-        self.background_color = (0,0,0,0)
-    on_release:
-        self.background_color = (1,1,1,1)
+        self.parent.parent.check(self)
+        #self.background_color = (0,0,0,0)
+    #on_release:
+        #self.background_color = (1,1,1,1)
     background_color: (1,1,1,1)
     background_normal: ''
+    #on_state:
+        #if(self.state) == 'down':
+        #self.background_color = (0,0,0,0)
+        #else:
+        #self.background_color = (1,1,1,1)
 
 <Lost>:
     title: 'Loss!'
@@ -57,6 +64,7 @@ Man:
         Button:
             text: 'Start!'
             color: 172/255, 115/255, 0, 0.5
+            on_press: app.root.get_screen('gamescreen').change_flag()
             on_release: app.root.current = 'gamescreen'
             background_color: (0,0,0,0)
             background_normal: ''
@@ -74,31 +82,25 @@ Man:
 <GameScreen>:
     name: 'gamescreen'
     GridLayout:
-        #canvas:
-            #Color:
-                #rgba: (1,1,1,1)
-            #Rectangle:
-                #pos: self.pos
-                #size: self.size
         cols: 3
         padding: 5
         spacing: 5
         GameButton:
-            id: 0
-            on_release: Factory.Won().open()
+            text: '0'
+            #on_release: Factory.Won().open()
         GameButton:
-            id: 1
+            text: '1'
         GameButton:
-            id: 2
+            text: '2'
         GameButton:
-            id: 3
+            text: '3'
         GameButton:
-            id: 4
+            text: '4'
         GameButton:
-            id:5
+            text: '5'
         GameButton:
-            id: 6
+            text: '6'
         GameButton:
-            id: 7
+            text: '7'
         GameButton:
-            id: 8
+            text: '8'
