@@ -18,14 +18,18 @@ class Won(Popup):
 
 class GameScreen(Screen):
     dt = 1.5
+    ct = 0
+    it = 0
     flag = False
-    prop = 1
+    prop = 0
     timer = None
 
     def restart(self):
+        self.ct = 0
+        self.it = 0
+        self.dt = 1.5
         self.timer = Clock.schedule_interval(self.randomizer, self.dt)
         for child in self.children[0].children:
-            # child.background_color = (1,1,1,1)
             child.state = 'normal'
 
     def change_flag(self):
@@ -37,32 +41,42 @@ class GameScreen(Screen):
             self.timer = Clock.schedule_interval(self.randomizer, self.dt)
 
     def randomizer(self, interval):
+        if(self.ct != self.it):
+            self.loss()
+        self.it+= 1
         for child in self.children[0].children:
-            # child.background_color = (1,1,1,1)
+            child.background_color = (0,0,0,0)
+            child.color = (0,0,0,0)
             child.state = 'normal'
         ran = rand(0, 8)
         self.prop = ran
         self.children[0].children[ran].state = 'down'
+        self.children[0].children[ran].background_color = (1,1,1,1)
+        self.children[0].children[ran].color = (1,1,1,1)
+
 
     def check(self, instance):
+        self.ct+= 1
         act = int(self.get_id(instance))
         if(act == self.prop):
             self.timer.cancel()
-            print(self.dt)
             self.dt -= .1
-            if(self.dt <= .7):
+            if(self.dt <= .5):
                 won = Won()
                 won.open()
             else:
                 self.timer = Clock.schedule_interval(self.randomizer,self.dt)
         else:
-            self.timer.cancel()
-            lost = Lost()
-            lost.open()
+            self.loss()
 
     def get_id(self,  instance):
         for child in instance.parent.children:
             if child.__self__ == instance:
                 return child.text
+
+    def loss(self):
+        self.timer.cancel()
+        lost = Lost()
+        lost.open()
 
 root_widget = Builder.load_file('manager.kv')
