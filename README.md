@@ -9,3 +9,8 @@ Linux:
 ```bash
 source kivy_venv/bin/activate
 ```
+
+### Running buildozer
+```bash
+buildozer android debug deploy
+```
